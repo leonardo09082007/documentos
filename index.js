@@ -55,19 +55,21 @@ app.post("/login", async (req,res)=>{
                 return res.status(401).json({erro: "Credenciais Inválidas"})
             }
 
-    
+            const token = jwt.sign(resultado[0][0], "senha_muito_forte", {expiresIn: "1m"})
+            return res.status(200).json({token: token})
     }catch (erro) {
         res.status(500).json({erro: "Erro interno na API"})
         console.log(erro)
     }
-    const token = jwt.sign(dados, "senha_muito_forte", {expiresIn: "1m"})
-    return res.status(200).json({token: token})
 })
 
 
-app.get("/clientes", async (req,res) => {
+app.get("/perfil", async (req,res) => {
+    const email = token.email
     try {
-        const resultado = await db.pool.query("SELECT * FROM cliente")
+        const resultado = await db.pool.query("SELECT * FROM cliente WHERE = email = ?"
+        [email]
+        )
         res.status(200).json(resultado[0])
     } catch (erro){
         console.log(erro)
