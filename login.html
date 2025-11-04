@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epa Shop - Formulário de Cadastro</title>
+
+    <style>
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* CABEÇALHO */
+.company-header {
+  background-color: #1e293b;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  background-color: #3b82f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.company-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #cbd5e1;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #334155;
+  color: #fff;
+}
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* CORPO */
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+/* TÍTULO */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #64748b;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+/* FORMULÁRIO */
+.form-container {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"] {
+  padding: 12px 14px;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+input:focus {
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.cep-container {
+  display: flex;
+  gap: 10px;
+}
+
+.cep-container input {
+  flex: 1;
+}
+
+.btn-buscar {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn-buscar:hover {
+  background-color: #2563eb;
+}
+
+.cep-info {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* BOTÃO FINALIZAR */
+input[type="submit"] {
+  grid-column: span 2;
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #10b981;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #059669;
+}
+
+/* NOTIFICAÇÕES */
+.notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateX(150%);
+  transition: transform 0.5s ease;
+  z-index: 9999;
+  font-weight: 600;
+  color: white;
+}
+
+.notification.success {
+  background: #22c55e;
+}
+
+.notification.error {
+  background: #ef4444;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+/* RODAPÉ */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  padding: 20px;
+  background-color: #1e293b;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    grid-column: span 1;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: #1e293b;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .company-name {
+    font-size: 1.5rem;
+  }
+
+  .form-container {
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho da Empresa -->
+    <header class="company-header">
+        <div class="logo-container">
+            <div class="logo">ES</div>
+            <div class="company-name">Epa Shop</div>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#">PRODUTOS</a>
+            <a href="#">CADASTRO</a>
+            <a href="#">CARRINHO</a>
+        </nav>
+        
+        <button class="mobile-menu-btn">☰</button>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <h1>Formulário de Login</h1>
+            <p class="subtitle">Complete seus dados para finalizar o Login</p>
+        </div>
+        
+        <div class="form-login">
+            <form id="form-login">
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+
+                <input type="submit" value="Finalizar Login">
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Epa Shop - Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <script src="formulario.html"></script>
+    |<script src="./login.js"></script>
+</body>
+</html>
